@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx-secrets-store
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    volumeMounts:
+    - name: secrets-store-inline
+      mountPath: "/mnt/secrets-store"
+      readOnly: true
+  volumes:
+    - name: secrets-store-inline
+      csi:
+        driver: secrets-store.csi.k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: "azure-kv" # Name of the SecretProviderClass that we created in step 4
+        nodePublishSecretRef:
+          name: akv-creds  # secret name that has SP client_id and client_secret
