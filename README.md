@@ -1,6 +1,6 @@
 # AKS-with-Azure-Vaults
 
-#Create Csi driver using helm charts p
+#Create Csi driver using helm charts 
 helm repo add secrets-store-csi-driver https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts
 kubectl create ns $CSI_NS
 helm install csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver -n $CSI_NS
